@@ -4,15 +4,22 @@ import re
 
 
 PATTERN = "<tr.*\\s*.*\\s*.*\\s.*\\s.*\\s.*\\s.*\\s.*\\s.*</tr>"
+FILE_PATH = file.get_files_path()
 
-from file.file_processing import file_to_list
-
-
-def extract_content(files_path):
-    files = file_to_list(files_path)
+def extract_content():
+    files = file.file_to_list(FILE_PATH)
     content = files[0][88:-10], files[1][88:-10]
     return content
 
+def extract_header():
+    files = file.file_to_list(FILE_PATH)
+    header = files[0][1:89]
+    return header
+
+def extract_footer():
+    files = file.file_to_list(FILE_PATH)
+    footer = files[0][-10:]
+    return footer
 
 def extract_mods():
     os.chdir('.//temp')
