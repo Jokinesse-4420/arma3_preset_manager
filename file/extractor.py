@@ -22,6 +22,8 @@ def extract_footer():
     return footer
 
 def extract_mods():
+    content = extract_content()
+    file.create_temp(content)
     os.chdir('.//temp')
     f1 = open('temp.html','r',encoding='utf-8')
     f2 = open('temp2.html','r',encoding='utf-8')
