@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
@@ -21,7 +22,27 @@ def file_to_list(files_path):
     return files
 
 
-def extract_content(files_path):
-    files = file_to_list(files_path)
-    content = files[0][88:-10], files[1][88:-10]
-    return content
+def create_temp(content):
+    try:
+        os.mkdir('temp')
+        os.chdir('.\\temp')
+        fw = open('temp.html', 'w', encoding='utf-8')
+        sw = open('temp2.html', 'w', encoding='utf-8')
+        fw.writelines(content[0])
+        sw.writelines(content[1])
+        fw.close()
+        sw.close()
+        os.chdir('..\\')
+    except FileExistsError:
+        messagebox.showerror('Hint', 'folder already exist')
+
+
+def delete_temp():
+    try:
+        os.chdir('.\\temp')
+        os.remove('temp.html')
+        os.remove('temp2.html')
+        os.chdir('..\\')
+        os.rmdir('temp')
+    except FileNotFoundError:
+        messagebox.showerror('ERROR', 'error in supression')
