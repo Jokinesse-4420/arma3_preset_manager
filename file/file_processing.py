@@ -1,4 +1,5 @@
 import os
+import sys
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
@@ -8,7 +9,9 @@ def get_files_path():
     root.withdraw()
     files_path = filedialog.askopenfilename(title='First preset'), filedialog.askopenfilename(title='Second preset')
     while files_path[0] == files_path[1] or (len(files_path[0]) == 0 or len(files_path[1]) == 0):
-        messagebox.showerror('ERROR', 'The same preset has been selected twice or 1 of the presets is not selected')
+        result = messagebox.askretrycancel('ERROR', 'The same preset has been selected twice or 1 of the presets is not selected')
+        if not result:
+            sys.exit()
         files_path = filedialog.askopenfilename(title='First preset'), filedialog.askopenfilename(title='Second preset')
     return files_path
 
