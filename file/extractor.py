@@ -18,7 +18,7 @@ def extract_header():
 
 def extract_footer():
     files = file.file_to_list(FILE_PATH)
-    footer = files[0][-10:]
+    footer = files[0][-9:]
     return footer
 
 def extract_mods():
